@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Smart Locator Builder: XPath &amp; CSS Locator Generator</title>
+<meta name="description" content="Free XPath and CSS locator generator. Paste HTML or a DevTools screenshot, validate every locator, and copy Selenium or Playwright code. Runs in your browser.">
+<meta name="author" content="Vishwanath Rajasekaran">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="keywords" content="xpath generator, css selector generator, locator builder, selenium locators, playwright locators, test automation tool, sdet tools">
+<meta name="color-scheme" content="light dark"><meta name="theme-color" content="#e9eeff" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0b0e1d" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://tools.vishwanathrajasekaran.in/smart-locator/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Smart Locator Builder"><meta property="og:title" content="Smart Locator Builder: XPath &amp; CSS Locator Generator"><meta property="og:description" content="Turn a DOM snapshot or DevTools screenshot into validated, ranked XPath and CSS locators with Selenium and Playwright code."><meta property="og:url" content="https://tools.vishwanathrajasekaran.in/smart-locator/"><meta property="og:image" content="https://tools.vishwanathrajasekaran.in/smart-locator/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Smart Locator Builder with a sample XPath locator"><meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Smart Locator Builder: XPath &amp; CSS Locator Generator"><meta name="twitter:description" content="Validated, ranked XPath and CSS locators from HTML or a screenshot. Selenium and Playwright output. Runs in your browser."><meta name="twitter:image" content="https://tools.vishwanathrajasekaran.in/smart-locator/og-image.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E🎯%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","name":"Smart Locator Builder","url":"https://tools.vishwanathrajasekaran.in/smart-locator/","applicationCategory":"DeveloperApplication","operatingSystem":"Any (web browser)","description":"Browser-based tool that generates, validates and ranks XPath and CSS locators from a DOM snapshot or DevTools screenshot, with Selenium and Playwright output.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Person","name":"Vishwanath Rajasekaran","jobTitle":"SDET and Test Automation Engineer","url":"https://vishwanathrajasekaran.in","sameAs":["https://github.com/vishwanathrajasekaran","https://www.linkedin.com/in/vishwanathrajasekaran/"]}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is Smart Locator Builder?","acceptedAnswer":{"@type":"Answer","text":"A free browser tool that turns pasted HTML or a DevTools screenshot into ranked, validated XPath and CSS locators."}},{"@type":"Question","name":"Is my HTML uploaded anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. Parsing, locator generation, validation and screenshot reading (OCR) all run in your browser."}},{"@type":"Question","name":"Which automation frameworks are supported?","acceptedAnswer":{"@type":"Answer","text":"Selenium with C# and Java, Playwright with TypeScript and Java, plus generic XPath and CSS."}},{"@type":"Question","name":"Does a high score guarantee a locator will keep working?","acceptedAnswer":{"@type":"Answer","text":"No. Validation covers only the snapshot you provide, and scores are guidance, not a guarantee against future DOM changes."}}]}]}</script>
+<style>
+:root{--tx:#0f1424;--mut:#566079;--gl:rgba(255,255,255,.42);--gl2:rgba(255,255,255,.62);--bd:rgba(255,255,255,.75);--sh:rgba(40,55,110,.2);--ac:#3d63ff;--ok:#0c9a63;--wn:#c47f00;--er:#dc3a45;--b1:#9db8ff;--b2:#ffb3d9;--b3:#9cf0e0;--bg:#e9eeff;--inset:rgba(255,255,255,.7);
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--tx:#eef1ff;--mut:#9aa4c4;--gl:rgba(30,36,70,.4);--gl2:rgba(60,70,120,.45);--bd:rgba(255,255,255,.16);--sh:rgba(0,0,0,.5);--ac:#7e98ff;--ok:#43d89b;--wn:#f0b53c;--er:#ff6b74;--b1:#3a4fd6;--b2:#a2318f;--b3:#0f8f86;--bg:#0b0e1d;--inset:rgba(255,255,255,.22)}}
+:root[data-theme=dark]{--tx:#eef1ff;--mut:#9aa4c4;--gl:rgba(30,36,70,.4);--gl2:rgba(60,70,120,.45);--bd:rgba(255,255,255,.16);--sh:rgba(0,0,0,.5);--ac:#7e98ff;--ok:#43d89b;--wn:#f0b53c;--er:#ff6b74;--b1:#3a4fd6;--b2:#a2318f;--b3:#0f8f86;--bg:#0b0e1d;--inset:rgba(255,255,255,.22)}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;min-height:100vh;background:var(--bg);color:var(--tx);font:15px/1.45 "Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(40vmax 40vmax at 10% 5%,var(--b1),transparent 60%),radial-gradient(45vmax 45vmax at 95% 20%,var(--b2),transparent 60%),radial-gradient(50vmax 50vmax at 40% 105%,var(--b3),transparent 60%)}
+.g{position:relative;background:var(--gl);backdrop-filter:blur(26px) saturate(190%);-webkit-backdrop-filter:blur(26px) saturate(190%);border:1px solid var(--bd);border-radius:24px;box-shadow:0 10px 36px var(--sh),inset 0 1.5px 0 var(--inset),inset 0 -1px 0 rgba(255,255,255,.08)}
+.g::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(155deg,rgba(255,255,255,.35),transparent 38%)}
+.g>*{position:relative}
+.wrap{max-width:1200px;margin:0 auto;padding:12px}
+header{display:flex;align-items:center;gap:10px;padding:10px 14px;margin-bottom:12px;flex-wrap:wrap;border-radius:999px}
+.logo{font-weight:800;font-size:17px;letter-spacing:-.02em;flex:1;min-width:150px}.logo i{font-style:normal;color:var(--ac)}
+button,select,input,textarea{font:inherit;color:inherit}
+.b{border:1px solid var(--bd);background:var(--gl2);border-radius:999px;padding:7px 14px;cursor:pointer;backdrop-filter:blur(12px);box-shadow:inset 0 1px 0 var(--inset);font-weight:600;font-size:13px}
+.b:hover{filter:brightness(1.08)}.b:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+.b.p{background:linear-gradient(135deg,var(--ac),#8a5cff);color:#fff;border-color:transparent}
+.b.sm{padding:4px 10px;font-size:12px}
+select.b{padding-right:8px}
+.grid{display:grid;gap:12px}
+@media(min-width:900px){.grid{grid-template-columns:minmax(0,5fr) minmax(0,7fr);align-items:start}.stick{position:sticky;top:12px;max-height:calc(100vh - 24px);overflow:auto}}
+.card{padding:16px}.card h2{margin:0 0 8px;font-size:16px;letter-spacing:-.01em}
+textarea,input[type=text],input.f{width:100%;border:1px solid var(--bd);background:var(--gl2);border-radius:14px;padding:10px 12px;outline:0}
+textarea{height:150px;resize:vertical;font:12px/1.4 ui-monospace,Menlo,Consolas,monospace}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.mut{color:var(--mut);font-size:13px}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.chip{border:1px solid var(--bd);background:var(--gl);border-radius:999px;padding:3px 10px;font-size:12px;cursor:pointer}.chip.on{background:var(--ac);color:#fff;border-color:transparent}
+.list{display:flex;flex-direction:column;gap:6px;max-height:52vh;overflow:auto;margin-top:8px}
+.it{display:flex;gap:10px;align-items:center;padding:9px 11px;border-radius:16px;border:1px solid transparent;cursor:pointer;background:var(--gl)}
+.it:hover{border-color:var(--bd)}.it.on{border-color:var(--ac);background:var(--gl2)}
+.tag{font:600 11px ui-monospace,Menlo,monospace;padding:2px 8px;border-radius:8px;background:var(--gl2);border:1px solid var(--bd);white-space:nowrap}
+.sc{font-weight:800;min-width:34px;text-align:right}
+.ok{color:var(--ok)}.wn{color:var(--wn)}.er{color:var(--er)}
+.cand{padding:12px;border-radius:18px;margin-top:10px;background:var(--gl);border:1px solid var(--bd)}
+code,pre{font:12.5px/1.45 ui-monospace,Menlo,Consolas,monospace}
+.ex{display:block;padding:8px 10px;border-radius:12px;background:var(--gl2);overflow-x:auto;white-space:pre;margin:8px 0}
+.warn{font-size:12px;color:var(--wn);margin:2px 0}
+.stats{display:flex;gap:8px;flex-wrap:wrap}.st{flex:1;min-width:70px;padding:8px 10px;border-radius:16px;background:var(--gl);border:1px solid var(--bd)}.st b{display:block;font-size:20px}
+.modal{position:fixed;inset:0;z-index:9;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(10,14,30,.35);backdrop-filter:blur(6px)}.modal.on{display:flex}
+.modal .g{max-width:560px;width:100%;max-height:88vh;overflow:auto;padding:20px;background:var(--gl2)}
+.plans{display:grid;gap:10px;margin:12px 0}@media(min-width:560px){.plans{grid-template-columns:1fr 1fr}}
+.plan{padding:14px;border-radius:18px;background:var(--gl);border:1px solid var(--bd)}.plan ul{margin:8px 0 0;padding-left:18px;font-size:13px}
+#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);padding:8px 16px;border-radius:999px;background:var(--tx);color:var(--bg);font-size:13px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:20}#toast.on{opacity:1}
+.empty{padding:28px 10px;text-align:center}
+a.b{text-decoration:none;display:inline-block;color:inherit}.about{margin-top:12px;padding:18px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}.av{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:20px;color:#fff;background:linear-gradient(135deg,var(--ac),#ff6fb5);box-shadow:inset 0 1.5px 0 rgba(255,255,255,.5),0 6px 20px var(--sh)}footer.cp{text-align:center;padding:16px 8px 8px}details{border-top:1px solid var(--bd);padding:10px 0}summary{cursor:pointer;font-weight:600}details p{margin:8px 0 0}h1.logo{margin:0}.pre{max-height:110px;overflow:auto;white-space:pre-wrap;word-break:break-all}
+</style></head><body>
+<div class="wrap">
+<header class="g"><h1 class="logo">Smart Locator <i>Builder</i></h1>
+<a class="b" href="/">All tools</a><select id="fw" class="b" aria-label="Target framework"></select>
+<button class="b" id="th" aria-label="Toggle theme">Theme</button>
+<button class="b p" id="pro">Go Pro</button></header>
+<main class="grid">
+<div style="display:flex;flex-direction:column;gap:12px;min-width:0">
+<section class="g card"><h2>1. Import DOM</h2>
+<textarea id="src" aria-label="HTML to analyze" placeholder="Paste page HTML here, or upload a .html file" spellcheck="false"></textarea>
+<div class="row" style="margin-top:8px"><button class="b p" id="an">Analyze</button><button class="b" id="smp">Load sample</button><button class="b" id="rs">Reset</button>
+<button class="b" id="upb" type="button">Upload .html</button><button class="b" id="shb" type="button">From screenshot</button><input id="up" type="file" accept=".html,.htm,text/html" hidden aria-label="Upload an HTML file"><input id="shot" type="file" accept="image/*" hidden aria-label="Upload a screenshot"></div><div id="shs" class="mut" style="margin-top:6px" role="status" aria-live="polite"></div>
+<p class="mut" style="margin:8px 0 0">Everything runs in your browser, including screenshot reading (OCR). Nothing is uploaded. For best results crop to the DevTools Elements panel. You can also paste an image with Ctrl+V.</p></section>
+<section class="g card" id="invc"><h2>2. Element inventory</h2><div id="inv"><div class="empty mut">Analyze a DOM to see buttons, links, inputs, dropdowns and tables here.</div></div></section>
+</div>
+<section class="g card stick" id="det"><h2>3. Locators</h2><div class="empty mut">Select an element to see ranked, validated locators.</div></section>
+</main>
+<section class="g card" id="faq"><h2>Frequently asked questions</h2>
+<details><summary>What is Smart Locator Builder?</summary><p>A free browser tool that turns pasted HTML or a DevTools screenshot into ranked, validated XPath and CSS locators.</p></details>
+<details><summary>Is my HTML uploaded anywhere?</summary><p>No. Parsing, locator generation, validation and screenshot reading (OCR) all run in your browser.</p></details>
+<details><summary>Which automation frameworks are supported?</summary><p>Selenium with C# and Java, Playwright with TypeScript and Java, plus generic XPath and CSS.</p></details>
+<details><summary>Does a high score guarantee a locator will keep working?</summary><p>No. Validation covers only the snapshot you provide, and scores are guidance, not a guarantee against future DOM changes.</p></details></section>
+<section class="g about" aria-label="About the creator"><div class="av" aria-hidden="true">VR</div>
+<div style="flex:1;min-width:220px"><h2 style="margin:0;font-size:17px">Vishwanath Rajasekaran</h2><div class="mut">SDET and Test Automation Engineer. I build tools that make automation faster to write and easier to maintain.</div></div>
+<div class="row"><a class="b p" href="https://vishwanathrajasekaran.in" target="_blank" rel="noopener">Visit my portfolio</a><a class="b" href="https://github.com/vishwanathrajasekaran" target="_blank" rel="noopener">GitHub</a><a class="b" href="https://www.linkedin.com/in/vishwanathrajasekaran/" target="_blank" rel="noopener">LinkedIn</a></div></section>
+<footer class="cp mut">&copy; <span id="yr">2026</span> Vishwanath Rajasekaran. All rights reserved. <a href="https://vishwanathrajasekaran.in" target="_blank" rel="noopener" style="color:inherit">vishwanathrajasekaran.in</a></footer>
+</div>
+<div class="modal" id="m"><div class="g" id="mb" role="dialog" aria-modal="true" aria-label="Dialog"></div></div><div id="toast" role="status" aria-live="polite"></div><noscript><p style="padding:16px">Smart Locator Builder needs JavaScript to analyze HTML in your browser.</p></noscript>
+<script>
+const $=s=>document.querySelector(s),h=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])),J=JSON.stringify;
+const SMP=`<header id="top"><nav class="nav-a1b2c3d4"><a href="/home">Home</a><a href="/pricing">Pricing</a><a href="/docs" class="css-1x2y3z">Docs</a></nav></header>
+<main><form id="login-form" action="/login"><h2>Sign in</h2>
+<label for="email">Email address</label><input id="email" name="email" type="email" placeholder="you@company.com" data-testid="login-email">
+<label for="pwd">Password</label><input id="pwd" name="password" type="password" placeholder="Password">
+<label><input type="checkbox" name="remember"> Remember me</label>
+<button type="submit" class="btn btn-primary css-9f8e7d">Sign in</button><button type="button" class="btn">Cancel</button></form>
+<form id="signup"><label for="country">Country</label><select id="country" name="country"><option>India</option><option>Philippines</option></select>
+<span>Plan</span><input type="radio" name="plan" value="free"> Free <input type="radio" name="plan" value="pro"> Pro
+<button type="submit" class="btn btn-primary">Sign in</button></form>
+<table id="orders"><tr><th>Order</th><th>Action</th></tr><tr><td>#1001</td><td><button class="btn">Delete</button></td></tr><tr><td>#1002</td><td><button class="btn">Delete</button></td></tr></table></main>
+<footer><a href="/privacy">Privacy</a><a href="/terms">Terms</a></footer>`;
+const FW={cs:['Selenium C#',(v,c)=>`By ${v} = By.${c.k=='css'?'CssSelector':'XPath'}(${J(c.e)});`],jv:['Selenium Java',(v,c)=>`By ${v} = By.${c.k=='css'?'cssSelector':'xpath'}(${J(c.e)});`],pt:['Playwright TypeScript',(v,c)=>`const ${v} = page.locator(${J((c.k=='css'?'':'xpath=')+c.e)});`],pj:['Playwright Java',(v,c)=>`Locator ${v} = page.locator(${J((c.k=='css'?'':'xpath=')+c.e)});`],gen:['Generic XPath / CSS',(v,c)=>c.e]};
+const SEL='a[href],button,input:not([type=hidden]),select,textarea,table,summary,[role=button],[role=link],[role=tab],[role=checkbox],[onclick]';
+const SKIP=/^(html|head|body|script|style|meta|link|title|option|optgroup|tr|td|th|thead|tbody|br|svg|path)$/;
+const pick=el=>{const t=el.tagName.toLowerCase();if(SKIP.test(t))return false;return el.matches(SEL)||el.matches('[id],[data-testid],[data-test],[data-qa],[data-cy],h1,h2,h3,h4,h5,h6,label,img,li')||(!el.children.length&&!!txt(el))};
+const PR={'Test attribute':0,'ID':1,'Label relation':2,'Attribute':3,'Parent-child':4,'Class':5,'Text':6,'contains()':7,'Sibling':8,'Position':9};
+const OCR=location.pathname.replace(/index\.html$/,'').replace(/\/?$/,'/')+'ocr/';
+const FREE=25;let S={run:0,busy:false,tq:'',els:[],sel:null,fw:'cs',q:'',ty:'All',st:'All',pro:false,doc:null};
+try{S.pro=localStorage.getItem('slb_pro')==='1';S.fw=localStorage.getItem('slb_fw')||'cs'}catch(e){}
+$('#fw').innerHTML=Object.entries(FW).map(([k,v])=>`<option value="${k}">${v[0]}</option>`).join('');$('#fw').value=S.fw;
+const xq=s=>!s.includes("'")?`'${s}'`:!s.includes('"')?`"${s}"`:`concat('${s.split("'").join(`',"'",'`)}')`;
+const cq=s=>s.replace(/\\/g,'\\\\').replace(/"/g,'\\"');
+const DYN=/\d{4,}|[0-9a-f]{8,}|^(css|sc|jss|ng|ember|mui|chakra)-|^:r|[a-z]-(?=[a-z0-9]*\d)[a-z0-9]{6,8}$/i;
+function run(c){try{if(c.k=='css')return[...S.doc.querySelectorAll(c.e)];const r=S.doc.evaluate(c.e,S.doc,null,7,null),o=[];for(let i=0;i<r.snapshotLength;i++)o.push(r.snapshotItem(i));return o}catch(e){return null}}
+const ty=el=>{const t=el.tagName.toLowerCase(),y=(el.getAttribute('type')||'text').toLowerCase();if(t=='a')return'Link';if(t=='button'||/button/.test(el.getAttribute('role')||''))return'Button';if(t=='select')return'Dropdown';if(t=='table')return'Table';if(t=='textarea')return'Input';if(/^h[1-6]$/.test(t))return'Heading';if(t=='img')return'Image';if(!el.children.length&&txt(el))return'Text';if(t=='input')return y=='checkbox'?'Checkbox':y=='radio'?'Radio':/submit|button|reset/.test(y)?'Button':'Input';return'Other'};
+const txt=el=>(el.textContent||'').replace(/[ \t\r\n]+/g,' ').replace(/^ | $/g,'');
+const nm=el=>{const a=k=>el.getAttribute(k);return(a('aria-label')||a('id')||a('name')||a('placeholder')||a('value')||txt(el).slice(0,32)||el.tagName.toLowerCase())};
+const sec=el=>{const a=el.parentElement&&el.parentElement.closest('form,nav,header,footer,aside,main,table,section,dialog');return a?a.tagName.toLowerCase()+(a.id?'#'+a.id:''):'page'};
+function gen(el){const t=el.tagName.toLowerCase(),C=[],at=a=>el.getAttribute(a),T=txt(el),add=(s,k,e,n)=>C.push({s,k,e,note:n,pr:PR[s]==null?9:PR[s]});
+const id=at('id');if(id&&!DYN.test(id)){add('ID','css','#'+CSS.escape(id),'ID is the most direct hook');add('ID','xpath',`//${t}[@id=${xq(id)}]`,'ID attribute')}
+['data-testid','data-test','data-qa','data-cy'].forEach(a=>{const v=at(a);if(v){add('Test attribute','css',`[${a}="${cq(v)}"]`,'Dedicated test hook: most stable');add('Test attribute','xpath',`//${t}[@${a}=${xq(v)}]`,'Dedicated test hook')}});
+['name','aria-label','placeholder','title','alt','value','role'].forEach(a=>{const v=at(a);if(v&&v.length<80&&(a!='value'||/submit|button|radio|checkbox/.test(at('type')||''))){add('Attribute','css',`${t}[${a}="${cq(v)}"]`,`Uses the ${a} attribute`);add('Attribute','xpath',`//${t}[@${a}=${xq(v)}]`,`Uses the ${a} attribute`)}});
+const AT=['type','name','value','role','placeholder','aria-label','title'].filter(a=>{const v=at(a);return v&&v.length<80&&(a!='value'||/submit|button|radio|checkbox/.test(at('type')||''))}).slice(0,3);if(AT.length>1){add('Attribute','css',t+AT.map(a=>`[${a}="${cq(at(a))}"]`).join(''),'Combines '+AT.join(' + ')+' for uniqueness');add('Attribute','xpath',`//${t}[`+AT.map(a=>`@${a}=${xq(at(a))}`).join(' and ')+']','Combines '+AT.join(' + ')+' for uniqueness')}
+const href=at('href');if(t=='a'&&href){add('Attribute','css',`a[href="${cq(href)}"]`,'Matches link target');add('Attribute','xpath',`//a[@href=${xq(href)}]`,'Matches link target')}
+if(T&&T.length<60&&t!='input'&&t!='table'&&t!='select'){add('Text','xpath',`//${t}[normalize-space()=${xq(T)}]`,'Exact visible text (breaks if copy or language changes)');add('contains()','xpath',`//${t}[contains(normalize-space(),${xq(T.slice(0,24))})]`,'Partial text match')}
+const cl=[...el.classList].filter(c=>!DYN.test(c));if(cl.length){add('Class','css',t+cl.slice(0,2).map(c=>'.'+CSS.escape(c)).join(''),'Stable-looking class names');add('Class','xpath',`//${t}[contains(concat(' ',normalize-space(@class),' '),${xq(' '+cl[0]+' ')})]`,'Class token match')}
+const lab=id&&S.lbl.get(id);if(lab&&txt(lab)){add('Label relation','xpath',`//${t}[@id=//label[normalize-space()=${xq(txt(lab))}]/@for]`,'Follows the visible label, robust to id changes')}
+const wl=el.closest('label');if(wl&&t=='input'&&txt(wl)){add('Label relation','xpath',`//label[contains(normalize-space(),${xq(txt(wl))})]//${t}`,'Input wrapped by its label')}
+let p=el.parentElement,pd=0;while(p&&p.tagName!='BODY'&&pd<6){const pid=p.getAttribute('id'),pt=['data-testid','data-test'].find(a=>p.getAttribute(a));if(pid&&!DYN.test(pid)||pt){const pc=pid&&!DYN.test(pid)?'#'+CSS.escape(pid):`[${pt}="${cq(p.getAttribute(pt))}"]`,px=pid&&!DYN.test(pid)?`@id=${xq(pid)}`:`@${pt}=${xq(p.getAttribute(pt))}`;
+const d=['name','type','placeholder','aria-label'].find(a=>at(a));add('Parent-child','css',pc+' '+t+(d?`[${d}="${cq(at(d))}"]`:''),`Scoped to ancestor ${p.tagName.toLowerCase()}${pid?'#'+pid:''}`);add('Parent-child','xpath',`//*[${px}]//${t}`+(d?`[@${d}=${xq(at(d))}]`:T&&T.length<40&&t!='input'?`[normalize-space()=${xq(T)}]`:''),`Scoped to ancestor ${p.tagName.toLowerCase()}${pid?'#'+pid:''}`);break}p=p.parentElement;pd++}
+const ps=el.previousElementSibling;if(ps&&txt(ps)&&txt(ps).length<40)add('Sibling','xpath',`//${ps.tagName.toLowerCase()}[normalize-space()=${xq(txt(ps))}]/following-sibling::${t}`,'Anchored to preceding sibling text');
+let path=[],x=el,xp=[];while(x&&x.nodeType==1&&x.tagName!='HTML'){const tg=x.tagName.toLowerCase(),sb=[...x.parentElement.children].filter(c=>c.tagName==x.tagName),i=sb.indexOf(x)+1;xp.unshift(tg+(sb.length>1?`[${i}]`:''));path.unshift(tg+(sb.length>1?`:nth-of-type(${i})`:''));x=x.parentElement}
+add('Position','css',path.join(' > '),'Absolute path: last resort');add('Position','xpath','/html/'+xp.join('/'),'Absolute path: last resort');
+const seen=new Set();return C.filter(c=>{const k=c.k+c.e;if(seen.has(k))return false;seen.add(k);return true})}
+function val(c,el){const r=run(c),n=r?r.length:0,hit=!!r&&r.includes(el),w=[];let s=100,st=!r?'invalid':!hit?'nomatch':n==1?'unique':'multi';
+if(st=='unique'){}else if(st=='multi'){s-=25+Math.min(n*3,25);w.push(`Matches ${n} elements; add context to make it unique`)}else{s=0;w.push(r?'Does not match the selected element':'Invalid expression')}
+if(/\[\d+\]|nth-(of-type|child)/.test(c.e)){s-=30;w.push('Index-dependent: breaks when siblings are added or reordered')}
+if(DYN.test(c.e.replace(/nth-of-type\(\d+\)/g,''))&&c.s!='Text'&&c.s!='contains()'&&c.s!='Label relation'){s-=15;w.push('Contains a value that looks auto-generated')}
+const dp=(c.e.match(/ > |\/\/|\/| (?=[a-z#.\[])/g)||[]).length;if(dp>5){s-=10;w.push(`Deep structure (${dp} levels)`)}
+if(c.s=='Text'||c.s=='contains()'){s-=8;w.push('Text-based: sensitive to copy or localisation changes')}
+if(c.s=='Position'&&st!='nomatch'){s=Math.min(s,55);w.push('Structural path: breaks when the layout changes')}
+return{...c,n,st,sc:Math.max(0,Math.min(100,s)),w}}
+const rk=c=>c.sc*10-c.pr;
+function quick(e){if(e.v)return;e.v=[];for(const c of e.raw){const v=val(c,e.el);e.v.push(v);if(v.st=='unique'&&v.sc>=85)break}e.cs=e.v.slice().sort((a,b)=>rk(b)-rk(a));e.b=e.cs[0]}
+function ens(e){if(!e||e.full)return;if(!e.v)quick(e);const d=new Set(e.v.map(c=>c.k+c.e));e.raw.forEach(c=>{if(!d.has(c.k+c.e))e.v.push(val(c,e.el))});e.cs=e.v.slice().sort((a,b)=>rk(b)-rk(a));e.b=e.cs[0];e.full=true}
+async function analyze(){const src=$('#src').value.trim();if(!src)return toast('Paste HTML or load the sample first');
+const id=++S.run;S.doc=new DOMParser().parseFromString(src,'text/html');S.lbl=new Map();S.doc.querySelectorAll('label[for]').forEach(l=>{const f=l.getAttribute('for');if(!S.lbl.has(f))S.lbl.set(f,l)});
+S.els=[...S.doc.querySelectorAll('*')].filter(pick).map((el,i)=>({i,el,t:ty(el),sec:sec(el),nm:nm(el),raw:gen(el).sort((a,b)=>a.pr-b.pr),v:null,cs:[],b:null,full:false}));
+S.sel=null;S.q='';S.ty='All';S.st='All';S.busy=true;const n=S.els.length;
+for(let i=0;i<n;i++){quick(S.els[i]);if(i%10==9){st$('Scoring '+(i+1)+' of '+n+' elements…');await new Promise(r=>setTimeout(r,0));if(id!=S.run)return}}
+S.busy=false;st$('');render();toast(n+' elements found')}
+const cls=s=>s>=80?'ok':s>=50?'wn':'er';
+function vis(){return S.els.filter(e=>(S.ty=='All'||e.t==S.ty)&&(S.st=='All'||(S.st=='Unique'?e.b.st=='unique':S.st=='Needs work'?e.b.sc<80:true))&&(!S.q||(e.nm+e.t+e.sec+e.b.e).toLowerCase().includes(S.q.toLowerCase())))}
+function renderInv(){const E=S.els;if(!E.length)return;const types=['All',...new Set(E.map(e=>e.t))],uniq=E.filter(e=>e.b.st=='unique').length,avg=Math.round(E.reduce((a,e)=>a+e.b.sc,0)/E.length);
+const V=vis(),cap=S.pro?V:V.slice(0,FREE);
+$('#inv').innerHTML=`${S.shot=='ocr'?'<div class="plan warn" style="margin-bottom:10px">Read from a screenshot with OCR. Quotes, ids and symbols can be misread, so fix any typos in the box above and press Analyze, then check locators on the live page.</div>':S.shot=='text'?'<div class="plan warn" style="margin-bottom:10px">No HTML tags found in this screenshot, so only visible text was captured. Use a DevTools Elements screenshot to get ids and attributes.</div>':''}<div class="stats"><div class="st"><b>${E.length}</b><span class="mut">elements</span></div><div class="st"><b class="ok">${uniq}</b><span class="mut">unique best</span></div><div class="st"><b class="${cls(avg)}">${avg}</b><span class="mut">avg score</span></div></div>
+<input class="f" id="q" type="text" aria-label="Search elements" placeholder="Search by name, type, section or locator" value="${h(S.q)}" style="margin-top:10px">
+<div class="chips">${types.map(t=>`<span class="chip ${S.ty==t?'on':''}" data-ty="${t}" role="button" tabindex="0" aria-pressed="${S.ty==t}">${t}</span>`).join('')}</div>
+<div class="chips">${['All','Unique','Needs work'].map(t=>`<span class="chip ${S.st==t?'on':''}" data-st="${t}" role="button" tabindex="0" aria-pressed="${S.st==t}">${t}</span>`).join('')}</div>
+<div class="row"><button class="b sm" data-ex="json">Export JSON</button><button class="b sm" data-ex="csv">Export CSV</button><span class="mut">${V.length} shown</span></div>
+<div class="list">${cap.map(e=>`<div class="it ${S.sel==e.i?'on':''}" data-i="${e.i}" role="button" tabindex="0"><span class="tag">${e.t}</span><div style="flex:1;min-width:0"><div style="font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${h(e.nm)}</div><div class="mut" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${h(e.sec)}</div></div><span class="sc ${cls(e.b.sc)}">${e.b.sc}</span></div>`).join('')||'<div class="empty mut">No elements match these filters.</div>'}
+${!S.pro&&V.length>FREE?`<div class="plan"><b>${V.length-FREE} more elements hidden</b><div class="mut">The free plan shows ${FREE} per DOM. <a href="#" id="up2">Unlock with Pro</a></div></div>`:''}</div>`;
+const q=$('#q');q.oninput=()=>{S.q=q.value;const p=q.selectionStart;renderInv();const n=$('#q');n.focus();n.setSelectionRange(p,p)}}
+function render(){renderInv();detail()}
+const vn=e=>{const w=e.nm.replace(/[^a-zA-Z0-9 ]/g,' ').trim().split(/\s+/).slice(0,4).map((x,i)=>i?x[0].toUpperCase()+x.slice(1).toLowerCase():x.toLowerCase()).join('')||'el';return(/^\d/.test(w)?'el'+w:w)+(e.t=='Other'?'':e.t)};
+function tester(){const box=$('#tq');S.tq=box.value;const raw=box.value.trim();if(!raw){$('#tr').innerHTML='';return}let e=raw,k=/^(\.{0,2}\/|\()/.test(raw)?'xpath':'css';const m=raw.match(/^(xpath|css)=/i);if(m){k=m[1].toLowerCase();e=raw.slice(m[0].length)}
+const r=run({k,e});$('#tr').innerHTML=!r?'<span class="er">Invalid expression</span>':`<b class="${r.length==1?'ok':r.length?'wn':'er'}">${r.length} match${r.length==1?'':'es'}</b> (${k})`+r.slice(0,3).map(n=>`<code class="ex pre">${h(n.cloneNode(false).outerHTML.slice(0,160))}</code>`).join('')}
+function detail(){const e=S.els[S.sel];if(!e){$('#det').innerHTML='<h2>3. Locators</h2><div class="empty mut">Select an element to see ranked, validated locators.</div>';return}
+ens(e);const f=FW[S.fw][1],v=vn(e),snip=e.el.cloneNode(false).outerHTML.slice(0,220),bc=[];let x=e.el;while(x&&x.tagName&&x.tagName!='HTML'){bc.unshift(x.tagName.toLowerCase()+(x.id?'#'+x.id:''));x=x.parentElement}
+$('#det').innerHTML=`<h2>3. Locators for <span class="tag">${e.t}</span> ${h(e.nm)}</h2><code class="ex pre">${h(snip)}</code><div class="mut" style="word-break:break-all">${h(bc.join(' › '))}</div>
+${e.cs.slice(0,8).map((c,i)=>`<div class="cand"><div class="row"><span class="tag">${c.s}</span><span class="tag">${c.k}</span><span class="tag ${c.st=='unique'?'ok':c.st=='multi'?'wn':'er'}">${c.st=='unique'?'1 match':c.st=='multi'?c.n+' matches':c.st=='nomatch'?'0 matches':'invalid'}</span><span style="flex:1"></span><b class="sc ${cls(c.sc)}">${c.sc}</b></div>
+<code class="ex">${h(c.e)}</code><code class="ex" style="opacity:.85">${h(f(v,c))}</code><div class="mut">${h(c.note)}</div>${c.w.map(w=>`<div class="warn">⚠ ${h(w)}</div>`).join('')}
+<div class="row" style="margin-top:6px"><button class="b sm" data-cp="${i}" data-m="r">Copy locator</button><button class="b sm" data-cp="${i}" data-m="s">Copy snippet</button></div></div>`).join('')}
+<div class="cand"><b>Test your own locator</b><div class="mut">Validate any XPath or CSS against the imported DOM. Relative XPath (.//) and the xpath= / css= prefixes work too.</div><input class="f" id="tq" type="text" aria-label="Locator to test" placeholder="//button[text()='Sign in']  or  form .btn" style="margin-top:8px"><div id="tr" class="mut" style="margin-top:8px"></div></div>
+<p class="mut">Validation covers this snapshot only. Scores are guidance, not a guarantee of long-term stability.</p>`;
+$('#tq').value=S.tq||'';$('#tq').oninput=tester;if(S.tq)tester()}
+function cp(t){const ok=()=>toast('Copied');try{navigator.clipboard.writeText(t).then(ok,fb)}catch(e){fb()}function fb(){const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy');ok()}catch(e){toast('Copy failed')}a.remove()}}
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('on'),1600)}
+let LF=null;function modal(html){LF=document.activeElement;$('#mb').innerHTML=html;const hh=$('#mb h2');$('#mb').setAttribute('aria-label',hh?hh.textContent:'Dialog');$('#m').classList.add('on');const f=$('#mb').querySelector('input,textarea,button');if(f)f.focus()}const close=()=>{$('#m').classList.remove('on');if(LF&&LF.focus)LF.focus()};
+$('#m').onclick=e=>{if(e.target.id=='m'||e.target.dataset.x!=null)close()};
+function exp(kind){if(!S.pro)return upsell('Exports');vis().forEach(ens);const f=FW[S.fw][1],rows=vis().map(e=>({type:e.t,section:e.sec,name:e.nm,strategy:e.b.s,kind:e.b.k,locator:e.b.e,matches:e.b.n,status:e.b.st,score:e.b.sc,snippet:f(vn(e),e.b),alternatives:e.cs.slice(1,4).map(c=>c.e)}));
+let o;if(kind=='json')o=J(rows,null,2);else{const q=v=>'"'+String(v).replace(/"/g,'""')+'"';o=['type,section,name,strategy,kind,locator,matches,status,score,snippet'].concat(rows.map(r=>[r.type,r.section,r.name,r.strategy,r.kind,r.locator,r.matches,r.status,r.score,r.snippet].map(q).join(','))).join('\n')}
+window._x=o;modal(`<h2 style="margin:0 0 8px">Export ${kind.toUpperCase()}</h2><textarea id="xo" readonly style="height:260px">${h(o)}</textarea><div class="row" style="margin-top:10px"><button class="b p" id="xc">Copy all</button><button class="b" id="xd">Download file</button><button class="b" data-x>Close</button></div>`);$('#xc').onclick=()=>cp(window._x);$('#xd').onclick=()=>dl('locators.'+kind,window._x,kind=='json'?'application/json':'text/csv')}
+function upsell(why){modal(`<h2 style="margin:0">${why?h(why)+' are a Pro feature':'Smart Locator Pro'}</h2><p class="mut">Core analysis stays free and local. Pro is for teams that live in locators every day.</p>
+<div class="plans"><div class="plan"><b>Free</b><div class="mut">$0</div><ul><li>${FREE} elements per DOM</li><li>All frameworks</li><li>Validation and scoring</li></ul></div>
+<div class="plan" style="border-color:var(--ac)"><b>Pro</b><div class="mut">$9 / month</div><ul><li>Unlimited elements</li><li>JSON and CSV export</li><li>Saved projects (soon)</li><li>Custom heuristics (soon)</li></ul></div></div>
+<div class="row"><input class="f" id="kc" type="text" placeholder="Pro code" style="flex:1"><button class="b p" id="ka">Activate</button></div><div class="row" style="margin-top:10px"><button class="b" data-x>Not now</button></div>`);
+$('#ka').onclick=()=>{if(/^VR/i.test($('#kc').value.trim())){S.pro=true;try{localStorage.setItem('slb_pro','1')}catch(e){}close();render();$('#pro').textContent='Pro active';toast('Pro unlocked')}else toast('Code not recognised')}}
+document.addEventListener('click',e=>{const t=e.target.closest('[data-i],[data-ty],[data-st],[data-ex],[data-cp],#up2');if(!t)return;
+if(t.id=='up2'){e.preventDefault();return upsell()}
+if(t.dataset.i!=null){S.sel=+t.dataset.i;ens(S.els[S.sel]);render();if(innerWidth<900)$('#det').scrollIntoView({behavior:'smooth'})}
+else if(t.dataset.ty){S.ty=t.dataset.ty;render()}else if(t.dataset.st){S.st=t.dataset.st;render()}else if(t.dataset.ex)exp(t.dataset.ex)
+else if(t.dataset.cp){const c=S.els[S.sel].cs[+t.dataset.cp];cp(t.dataset.m=='r'?c.e:FW[S.fw][1](vn(S.els[S.sel]),c))}});
+document.addEventListener('keydown',e=>{if((e.key=='Enter'||e.key==' ')&&e.target.getAttribute&&e.target.getAttribute('role')=='button'){e.preventDefault();e.target.click()}if(e.key=='Escape')close();if(e.key=='Tab'&&$('#m').classList.contains('on')){const f=[...$('#mb').querySelectorAll('button,input,textarea,select,a[href]')].filter(x=>!x.disabled),a=f[0],z=f[f.length-1];if(!a)return;if(!$('#mb').contains(document.activeElement)||(e.shiftKey&&document.activeElement==a)){e.preventDefault();z.focus()}else if(!e.shiftKey&&document.activeElement==z){e.preventDefault();a.focus()}}});
+$('#upb').onclick=()=>$('#up').click();$('#shb').onclick=()=>$('#shot').click();$('#an').onclick=()=>{S.shot=false;analyze()};$('#smp').onclick=()=>{$('#src').value=SMP;S.shot=false;analyze()};
+$('#up').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{$('#src').value=r.result;S.shot=false;analyze()};r.readAsText(f)};
+function prepOcr(f){return new Promise((ok,no)=>{const im=new Image(),u=URL.createObjectURL(f);im.onload=()=>{const k=im.width<1600?2:im.width>3200?3200/im.width:1,c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);const x=c.getContext('2d');x.drawImage(im,0,0,c.width,c.height);const d=x.getImageData(0,0,c.width,c.height),p=d.data;let sum=0;for(let i=0;i<p.length;i+=4){const g=.299*p[i]+.587*p[i+1]+.114*p[i+2];p[i]=p[i+1]=p[i+2]=g;sum+=g}
+if(sum/(p.length/4)<128)for(let i=0;i<p.length;i+=4)p[i]=p[i+1]=p[i+2]=255-p[i];x.putImageData(d,0,0);URL.revokeObjectURL(u);ok(c)};im.onerror=no;im.src=u})}
+let OW=null;const st$=m=>{$('#shs').textContent=m};
+function loadScript(src){return new Promise((ok,no)=>{if(window.Tesseract)return ok();const e=document.createElement('script');e.src=src;e.onload=ok;e.onerror=()=>no(new Error('OCR engine files not found. Deploy the ocr/ folder.'));document.head.appendChild(e)})}
+async function worker(){if(OW)return OW;await loadScript(OCR+'tesseract.min.js');OW=await Tesseract.createWorker('eng',1,{workerPath:OCR+'worker.min.js',corePath:OCR,langPath:OCR+'lang',logger:m=>{if(m.status=='recognizing text')st$('Reading screenshot… '+Math.round(m.progress*100)+'%')}});await OW.setParameters({tessedit_pageseg_mode:'6',preserve_interword_spaces:'1'});return OW}
+function ocr2html(t){t=t.replace(/[“”„]/g,'"').replace(/[‘’]/g,"'").replace(/==\s*\$0/g,' ').replace(/[▸▾▶▼►▹▿]+/g,' ').replace(/\s*\n\s*/g,' ').replace(/\s*=\s*"/g,'="').replace(/(?<=>)\s*(?:(?:flex|scroll|grid|view-source|event|slot|subgrid)\s*)+(?=<|"|$)/g,' ');
+const parts=t.split(/(<\/?[a-zA-Z][^<>]*>?)/).map(x=>x.trim()).filter(x=>x&&(x[0]=='<'||/[a-zA-Z0-9]/.test(x)));
+return{html:parts.map(x=>x[0]=='<'&&!x.endsWith('>')?x+'>':x).join('\n'),tags:parts.filter(x=>x[0]=='<').length}}
+async function shot(f){if(!f||!/^image\//.test(f.type))return;st$('Preparing screenshot…');
+try{const c=await prepOcr(f),w=await worker(),r=await w.recognize(c),raw=r.data.text||'',o=ocr2html(raw);
+if(o.tags){$('#src').value=o.html;S.shot='ocr'}else{const L=raw.split('\n').map(x=>x.trim()).filter(x=>x.length>1&&/[a-zA-Z]/.test(x));if(!L.length){st$('No text found. Try a sharper or larger screenshot.');return}$('#src').value=L.map(x=>'<span>'+h(x)+'</span>').join('\n');S.shot='text'}
+st$('');analyze()}catch(e){st$('Could not read the screenshot: '+e.message)}}
+$('#shot').onchange=e=>{shot(e.target.files[0]);e.target.value=''};
+document.addEventListener('paste',e=>{const f=[...(e.clipboardData?e.clipboardData.files:[])].find(x=>/^image\//.test(x.type));if(f){e.preventDefault();shot(f)}});
+function dl(name,data,type){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([data],{type}));a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),800)}
+function reset(){$('#src').value='';$('#shs').textContent='';$('#up').value='';$('#shot').value='';S.run++;S.busy=false;S.tq='';S.els=[];S.sel=null;S.q='';S.ty='All';S.st='All';S.doc=null;S.shot=false;
+$('#inv').innerHTML='<div class="empty mut">Analyze a DOM to see buttons, links, inputs, dropdowns and tables here.</div>';$('#det').innerHTML='<h2>3. Locators</h2><div class="empty mut">Select an element to see ranked, validated locators.</div>';close();toast('Reset')}
+$('#rs').onclick=reset;$('#yr').textContent=new Date().getFullYear();
+$('#fw').onchange=e=>{S.fw=e.target.value;try{localStorage.setItem('slb_fw',S.fw)}catch(x){}detail()};
+$('#pro').onclick=()=>upsell();if(S.pro)$('#pro').textContent='Pro active';
+$('#th').onclick=()=>{const r=document.documentElement,d=r.dataset.theme?r.dataset.theme=='dark':matchMedia('(prefers-color-scheme:dark)').matches;r.dataset.theme=d?'light':'dark'};
+</script></body></html>
